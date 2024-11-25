@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const CheckBox = (props) => {
   const { label, name } = props;
 
@@ -16,18 +14,6 @@ const CheckBox = (props) => {
       </label>
     </>
   );
-};
-
-// Define prop types
-CheckBox.propTypes = {
-  label: PropTypes.string.isRequired, // label is required
-  name: PropTypes.string.isRequired, // name is required
-};
-
-// Define default props if needed
-CheckBox.defaultProps = {
-  label: '', // Default label if not provided (optional)
-  name: '', // Default name if not provided (optional)
 };
 
 export default CheckBox;

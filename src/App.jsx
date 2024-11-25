@@ -1,14 +1,12 @@
-import BalancePage from "./pages/balance";
-import DashboardPage from "./pages/dashboard";
-import ErrorRoute from "./pages/errorRoute";
-import Expenccespage from "./pages/expencces";
-import ForgotPassword from "./pages/forgotPassword";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignInPage from "./pages/signIn";
 import SignUpPage from "./pages/signUp";
-
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-
+import ErrorRoute from "./pages/errorRoute";
+import ForgotPassword from "./pages/forgotPassword";
+import DashboardPage from "./pages/dashboard";
+import BalancePage from "./pages/balance";
+import ExpensePage from "./pages/expense";
+import GoalPage from "./pages/goal";
 
 const App = () => {
   const myRouter = createBrowserRouter([
@@ -17,7 +15,10 @@ const App = () => {
       element: <DashboardPage/>,
       errorElement: <ErrorRoute/>,
     },
-     
+    {
+      path: "/eror",
+      element: <ErrorRoute/>
+    },
     {
       path: "/login",
       element: <SignInPage/>
@@ -35,9 +36,14 @@ const App = () => {
       element: <BalancePage/>
     },
     {
-      path: "/expencces",
-      element: <Expenccespage/>
+      path: "/goals",
+      element: <GoalPage/> 
+    },
+    {
+      path: "/expense",
+      element: <ExpensePage/>
     }
+
   ]);
 
   return (
