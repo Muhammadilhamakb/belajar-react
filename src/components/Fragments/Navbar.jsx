@@ -68,7 +68,7 @@ const Navbar = () => {
           </NavLink>
         ))}
       </div>
-      <div className="sticky bottom-12">
+      <div className=" bottom-12">
         <div className="flex bg-special-bg3 px-4 py-3 rounded-md hover:text-white">
 	          <div className="mx-auto sm:mx-0">
               <Icon.Logout/>
@@ -78,7 +78,7 @@ const Navbar = () => {
         <div className="border-b my-10 border-b-special-bg"></div>
         <div className="flex justify-between">
           <div className="mx-auto sm:mx-0 self-center">
-            <img class="w-10 h-10 rounded-full object-cover" src="images/profile2.jpg"/>
+            <img class="w-10 h-10 rounded-full object-cover" src="images/profile.jpg"/>
           </div>
           <div className="hidden sm:block">
             <div className="text-white font-bold">Username</div>

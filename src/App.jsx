@@ -6,6 +6,7 @@ import ForgotPassword from "./pages/forgotPassword";
 import DashboardPage from "./pages/dashboard";
 import BalancePage from "./pages/balance";
 import ExpensePage from "./pages/expense";
+import GoalPage from "./pages/goal";
 
 const App = () => {
   const myRouter = createBrowserRouter([
@@ -37,6 +38,10 @@ const App = () => {
     {
       path: "/expense",
       element: <ExpensePage/>
+    },
+    {
+      path: "/goals",
+      element: <GoalPage/>
     }
 
   ]);
