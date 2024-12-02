@@ -5,6 +5,7 @@ import MainLayout from "../components/Layouts/MainLayout";
 import bills from "../data/bills";
 import expensesBreakdowns from "../data/expense";
 import transactions from "../data/transaction";
+import CardBalance from "../components/Fragments/Dashboard/CardBalance";
 
 const DashboardPage = () => {
   const tabs = ["All", "Revenue", "Expense"];
@@ -96,7 +97,8 @@ const DashboardPage = () => {
   <MainLayout type="dashboard">
   {/* top content start*/}
   <div className="md:grid md:grid-cols-3 md:gap-x-6">
-    <Card title="Total Balance" />
+    <CardBalance />
+    {/* <Card title="Total Balance" /> */}
     <Card title="Goals" />
     <Card title="Upcoming Bill" desc={billCard} />
     <Card
