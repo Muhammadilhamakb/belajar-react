@@ -1,15 +1,32 @@
 
 import SignInPage from '../../pages/signIn'
 import Logo from '../Elements/Logo/index'
+import { useContext } from 'react'
+import { NotifContext } from '../../context/notifContext'
 import FormSignIn from '../Fragments/FormSignIn'
 import { Link } from 'react-router-dom'
+import SimpleBackdrop from '../Elements/Backdrop'
+import CustomizedSnackbars from '../Elements/SnackBar'
 
 const AuthLayout = (props) => {
   const {children,type} = props;
+  const {msg, setMsg, open, setOpen, isLoading, setIsLoading} = useContext(NotifContext);
+
   return (
     <div className="flex justify-center min-h-screen items-center bg-special-mainBg">
     {/* container start */}
     <div className="w-full max-w-sm">
+      {isLoading && (
+        <SimpleBackdrop isLoading={isLoading} setIsLoading={setIsLoading} />
+      )}
+      {msg && (
+        <CustomizedSnackbars
+          severity={msg.severity}
+          message={msg.desc}
+          open={open}
+          setOpen={setOpen}
+        />
+      )}
       <Logo/>
       {/* form start */}
       <div className="mt-16">{children}</div>
