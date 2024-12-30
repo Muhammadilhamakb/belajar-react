@@ -107,11 +107,8 @@ const FormSignIn = () => {
       <CheckBox label="Keep me signed in" name="status" />
     </div>
     <Button
-      variant={
-        !isValid
-          ? "bg-gray-05 w-full text-white"
-          : "bg-primary w-full text-white"
-      }
+      variant={`${!isValid ? "bg-gray-05" : "bg-primary zoom-in"}
+                w-full text-white`}
       type="submit"
       disabled={!isValid ? "disabled" : ""}
     >
