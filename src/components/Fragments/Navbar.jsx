@@ -142,7 +142,7 @@ const Navbar = () => {
         <div className="border-b my-10 border-b-special-bg"></div>
         <NavLink to="/profile" className="flex justify-between">
           <div className="mx-auto sm:mx-0 self-center">
-          <img class="w-10 h-10 rounded-full object-cover" src="images/profile2.jpg"/>
+          <img class="w-10 h-10 rounded-full object-cover" src="images/profile.jpg"/>
           </div>
           <div className="hidden sm:block">
             <div className="text-white font-bold">{name}</div>
