@@ -1,10 +1,10 @@
 import Button from "../Elements/Button";
 import CheckBox from "../Elements/CheckBox";
 import LabeledInput from "../Elements/LabeledInput";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CustomizedSnackbars from "../Elements/SnackBar";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ const FormSignIn = () => {
 
   const navigate = useNavigate();
 
-  const{
+  const {
     register,
     handleSubmit,
     formState: { errors, isValid },
@@ -25,7 +25,16 @@ const FormSignIn = () => {
     mode: "onChange",
   });
 
- 
+  // Fungsi untuk mengambil nama pengguna dari localStorage saat komponen dimuat
+  useEffect(() => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (refreshToken) {
+      const decoded = jwtDecode(refreshToken);
+      setName(decoded.name); // Setel nama pengguna dari token yang tersimpan
+      setIsLoggedIn(true); // Setel status login ke true
+    }
+  }, [setName, setIsLoggedIn]);
+
   const onErrors = (errors) => console.error(errors);
 
   const onFormSubmit = async (data) => {
@@ -48,6 +57,7 @@ const FormSignIn = () => {
 
       const decoded = jwtDecode(response.data.refreshToken);
       setName(decoded.name);
+      localStorage.setItem("userName", decoded.name); // Simpan nama pengguna ke localStorage
 
       navigate("/");
 
@@ -84,44 +94,44 @@ const FormSignIn = () => {
         )}
       </div>
       <div className="mb-6">
-      <LabeledInput
-        label="Password"
-        type="password"
-        placeholder="*************"
-        name="password"
-        register={{
-          ...register("password", {required: "Password is required"}),
-        }}
-      />
-      {errors?.password && (
+        <LabeledInput
+          label="Password"
+          type="password"
+          placeholder="*************"
+          name="password"
+          register={{
+            ...register("password", { required: "Password is required" }),
+          }}
+        />
+        {errors?.password && (
           <div className="text-center text-red-500">{errors.password.message}</div>
         )}
-      <div className="mt-2">
-        <Link to="/forgot-password" className="text-primary text-sm font-medium">
-          Forgot Password?
-        </Link>
+        <div className="mt-2">
+          <Link to="/forgot-password" className="text-primary text-sm font-medium">
+            Forgot Password?
+          </Link>
+        </div>
       </div>
-    </div>
-      
-    <div className="mb-3">
-      <CheckBox label="Keep me signed in" name="status" />
-    </div>
-    <Button
-      variant={`${!isValid ? "bg-gray-05" : "bg-primary zoom-in"}
-                w-full text-white`}
-      type="submit"
-      disabled={!isValid ? "disabled" : ""}
-    >
-      Login
-    </Button>
-    {msg && (
-      <CustomizedSnackbars
-        severity={msg.severity}
-        message={msg.desc}
-        open={open}
-        setOpen={setOpen}
-      />
-    )}
+
+      <div className="mb-3">
+        <CheckBox label="Keep me signed in" name="status" />
+      </div>
+      <Button
+        variant={`${!isValid ? "bg-gray-05" : "bg-primary zoom-in"}
+                  w-full text-white`}
+        type="submit"
+        disabled={!isValid ? "disabled" : ""}
+      >
+        Login
+      </Button>
+      {msg && (
+        <CustomizedSnackbars
+          severity={msg.severity}
+          message={msg.desc}
+          open={open}
+          setOpen={setOpen}
+        />
+      )}
     </form>
   );
 };

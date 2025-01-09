@@ -1,6 +1,5 @@
 import React from 'react'
 import Button from "../Elements/Button";
-import CheckBox from "../Elements/CheckBox";
 import LabeledInput from "../Elements/LabeledInput";
 import { Link } from 'react-router-dom'
 import Logo from '../Elements/Logo/index'

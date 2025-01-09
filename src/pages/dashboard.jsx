@@ -8,12 +8,15 @@ import transactions from "../data/transaction";
 import CardBalance from "../components/Fragments/Dashboard/CardBalance";
 import CardStatistic from "../components/Fragments/Dashboard/CardStatistic";
 import CardGoal from "../components/Fragments/Dashboard/CardGoal";
+import { useDarkMode } from '../hooks/useDarkMode';
+import CardBills from "../components/Fragments/Dashboard/CardBills";
 
 const DashboardPage = () => {
   const tabs = ["All", "Revenue", "Expense"];
-
+  
   const [trxs, setTrx] = useState(transactions);
   const [activeTab, setActiveTab] = useState("All");
+  const { darkMode } = useDarkMode();
 
   function handleClick(e) {
     const transactionFiltered =
@@ -25,27 +28,27 @@ const DashboardPage = () => {
       setTrx(transactionFiltered);
   }
 
-  const billCard = bills.map((bill) => (
-    <div key={bill.id} className="lg:flex justify-between pt-3 pb-3">
-      <div className="flex">
-        <div className="bg-special-bg me-3 px-4 rounded-lg flex place-content-center flex-col">
-          <span className="text-xs">{bill.month}</span>
-          <span className="text-2xl font-bold">{bill.date}</span>
-        </div>
-        <div className="">
-          <img className="h-6" src={`/images/${bill.logo}`} />
-          <span className="font-bold">{bill.name}</span>
-          <br />
-          <span className="text-xs">Last Charge - {bill.lastCharge}</span>
-        </div>
-      </div>
-      <div className="flex place-content-center flex-col">
-        <span className="p-2 border rounded-lg font-bold text-center">
-          ${bill.amount}
-        </span>
-      </div>
-    </div>
-  ));
+  // const billCard = bills.map((bill) => (
+  //   <div key={bill.id} className="lg:flex justify-between pt-3 pb-3">
+  //     <div className="flex">
+  //       <div className="bg-special-bg me-3 px-4 rounded-lg flex place-content-center flex-col">
+  //         <span className="text-xs">{bill.month}</span>
+  //         <span className="text-2xl font-bold">{bill.date}</span>
+  //       </div>
+  //       <div className="">
+  //         <img className="h-6" src={`/images/${bill.logo}`} />
+  //         <span className="font-bold">{bill.name}</span>
+  //         <br />
+  //         <span className="text-xs">Last Charge - {bill.lastCharge}</span>
+  //       </div>
+  //     </div>
+  //     <div className="flex place-content-center flex-col">
+  //       <span className="p-2 border rounded-lg font-bold text-center">
+  //         ${bill.amount}
+  //       </span>
+  //     </div>
+  //   </div>
+  // ));
 
   const transactionCard = trxs.map((transaction) => (
     <div key={transaction.id} className="flex justify-between my-6">
@@ -98,11 +101,12 @@ const DashboardPage = () => {
   return (
   <MainLayout type="dashboard">
   {/* top content start*/}
-  <div className="md:grid md:grid-cols-3 md:gap-x-6">
+  <div className={`md:grid md:grid-cols-3 md:gap-x-6 ${darkMode ? 'bg-defaultBlack' : 'bg-special-mainBg'}`}>
     <CardBalance/>
     {/* <Card title="Goals" /> */}
     <CardGoal/>
-    <Card title="Upcoming Bill" desc={billCard} />
+    <CardBills/>
+    {/* <Card title="Upcoming Bill" desc={billCard} /> */}
     <Card
       variant="md:col-span-1 md:row-span-2"
       title="Recent Transaction"
@@ -136,6 +140,7 @@ const DashboardPage = () => {
       title="Expenses Breakdown"
       desc={<div className="lg:grid lg:grid-cols-3">{expenseCard}</div>}
     />
+    
   </div>
   {/* buttom content end */}
   </MainLayout>
